@@ -24,16 +24,16 @@ if i < len(s):
    if j < len(s):
       b = s[i + 5:j]
 
+      l = j + 1
+      while l < len(s):
+         l = l + 1
+
+      if l == len(s):
+         c = s[j + 2:l]
+         
    else:
       print '!!!!   Error, This is not a Quadratic   !!!!'
-
-   l = j + 1
-   while l < len(s):
-      l = l + 1
-
-   if l == len(s):
-      c = s[j + 2:l]
-
+      
 else:
    print '!!!!   Error, Wrong Variable Name Given   !!!!'
 
