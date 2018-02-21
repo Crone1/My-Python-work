@@ -1,0 +1,153 @@
+import sys
+
+tots = ['rf_total', 'sf_total', 'foac_total', 'fh_total', 'f_total',
+        's_total', 'toac_total', 'tp_total', 'op_total', 'nothing_total']
+
+possible_hands = ['a royal flush', 'a straight flush', 'four of a kind',
+                  'a full house', 'a flush', 'a straight', 'three of a kind',
+                  'two pairs', 'one pair', 'nothing']
+
+
+'''total = {'rf_total': 0,
+         'sf_total': 0,
+         'foac_total': 0,
+         'fh_total': 0,
+         'f_total': 0,
+         's_total': 0,
+         'toac_total': 0,
+         'tp_total': 0,
+         'op_total': 0,
+         'nothing_total': 0}'''
+
+
+
+def repeat(cards):
+    repeat = []
+
+    for i in range(len(cards)):
+        for j in range(len(cards)):
+            if cards[i] == cards[j] and i != j:
+                repeat.append(cards[i])
+
+    return len(repeat)
+
+
+def royal_flush(suits, cards):
+    royals = [1, 13, 12, 11, 10]
+    top_cards = []
+
+    if flush(suits):
+        for c in cards:
+            if int(c) in top_cards:
+                top.append(int(c))
+
+            else:
+                return False
+
+    return sorted(top_cards) == sorted(royals)
+
+
+def straight_flush(suits, cards):
+    return straight(cards) and flush(suits)
+
+
+def four_of_a_kind(cards):
+    return repeat(cards) >= 12
+
+
+def full_house(cards):
+    return repeat(cards) == 8
+
+
+def flush(suits):
+    i = 1
+    while i < len(suits) and suits[i] == suits[i - 1]:
+        i = i + 1
+
+    return i == len(suits)
+
+
+def straight(cards):
+    smallest = int(cards[0])
+    cards_wanted = ''
+
+    for c in cards:
+        if int(c) < int(smallest):
+            smallest = int(c)
+
+    for i in range(5):
+        cards_wanted = cards_wanted + str(smallest + i)
+
+    for c in cards:
+        if c in cards_wanted:
+            cards_wanted = cards_wanted.replace(c, '')
+
+        else:
+            return False
+
+    return not cards_wanted
+
+
+def three_of_a_kind(cards):
+    return repeat(cards) == 6
+
+
+def two_pairs(cards):
+    return repeat(cards) == 4
+
+
+def one_pair(cards):
+    return repeat(cards) == 2
+
+
+def call_functions(suits, cards):
+    total = {}
+    if royal_flush(suits, cards):
+        total['rf_total'] = 1
+
+    elif straight_flush(suits, cards):
+        total['sf_total'] = 1
+
+    elif four_of_a_kind(cards):
+        total['foac_total'] = 1
+
+    elif full_house(cards):
+        total['fh_total'] = 1
+
+    elif flush(suits):
+        total['f_total'] = 1
+
+    elif straight(cards):
+        total['s_total'] = 1
+
+    elif three_of_a_kind(cards):
+        total['toac_total'] = 1
+
+    elif two_pairs(cards):
+        total['tp_total'] = 1
+
+    elif one_pair(cards):
+        total['op_total'] = 1
+
+    else:
+        total['nothing_total'] = 1
+
+    return total
+
+
+def main():
+    for line in sys.stdin:
+        line = line.strip().split(',')
+        suits = line[::2][:-1]
+        cards = line[1::2]
+        totals = call_functions(suits, cards)
+        for key in totals:
+            if totals[key]:
+                i = 0
+                while i < len(tots):
+                    if tots[i] == key:
+                        print ('This hand is {}'.format(possible_hands[i]))
+                    i = i + 1
+
+if __name__ == '__main__':
+    main()
