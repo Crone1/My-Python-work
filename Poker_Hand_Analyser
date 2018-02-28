@@ -1,24 +1,13 @@
 import sys
 
-tots = ['rf_total', 'sf_total', 'foac_total', 'fh_total', 'f_total',
-        's_total', 'toac_total', 'tp_total', 'op_total', 'nothing_total']
+print('(Hearts   = 1\n Diamonds = 2\n Spades   = 3\n Clubs    = 4)\n')
+print('(Ace   = 1,\n 2     = 2,\n ..........,\n Jack  = 11,\n Queen = 12,\n King  = 13)\n')
+print('Example Input:\n"1,1,2,1,13,4,6,2,3,4" = Ace-Hearts, Two-Hearts, King-Clubs, Six-Diamonds, Three-Clubs\n')
+print('\nType out the cards in your hand:\n')
 
 possible_hands = ['a royal flush', 'a straight flush', 'four of a kind',
                   'a full house', 'a flush', 'a straight', 'three of a kind',
                   'two pairs', 'one pair', 'nothing']
-
-
-'''total = {'rf_total': 0,
-         'sf_total': 0,
-         'foac_total': 0,
-         'fh_total': 0,
-         'f_total': 0,
-         's_total': 0,
-         'toac_total': 0,
-         'tp_total': 0,
-         'op_total': 0,
-         'nothing_total': 0}'''
-
 
 
 def repeat(cards):
@@ -38,8 +27,8 @@ def royal_flush(suits, cards):
 
     if flush(suits):
         for c in cards:
-            if int(c) in top_cards:
-                top.append(int(c))
+            if int(c) in royals:
+                top_cards.append(int(c))
 
             else:
                 return False
@@ -101,53 +90,43 @@ def one_pair(cards):
 
 
 def call_functions(suits, cards):
-    total = {}
     if royal_flush(suits, cards):
-        total['rf_total'] = 1
+        print('This hand is {}'.format(possible_hands[0]))
 
     elif straight_flush(suits, cards):
-        total['sf_total'] = 1
+        print('This hand is {}'.format(possible_hands[1]))
 
     elif four_of_a_kind(cards):
-        total['foac_total'] = 1
+        print('This hand is {}'.format(possible_hands[2]))
 
     elif full_house(cards):
-        total['fh_total'] = 1
+        print('This hand is {}'.format(possible_hands[3]))
 
     elif flush(suits):
-        total['f_total'] = 1
+        print('This hand is {}'.format(possible_hands[4]))
 
     elif straight(cards):
-        total['s_total'] = 1
+        print('This hand is {}'.format(possible_hands[5]))
 
     elif three_of_a_kind(cards):
-        total['toac_total'] = 1
+        print('This hand is {}'.format(possible_hands[6]))
 
     elif two_pairs(cards):
-        total['tp_total'] = 1
+        print('This hand is {}'.format(possible_hands[7]))
 
     elif one_pair(cards):
-        total['op_total'] = 1
+        print('This hand is {}'.format(possible_hands[8]))
 
     else:
-        total['nothing_total'] = 1
-
-    return total
+        print('This hand is {}'.format(possible_hands[9]))
 
 
 def main():
     for line in sys.stdin:
         line = line.strip().split(',')
-        suits = line[::2][:-1]
+        suits = line[::2]
         cards = line[1::2]
-        totals = call_functions(suits, cards)
-        for key in totals:
-            if totals[key]:
-                i = 0
-                while i < len(tots):
-                    if tots[i] == key:
-                        print ('This hand is {}'.format(possible_hands[i]))
-                    i = i + 1
+        call_functions(suits, cards)
 
 if __name__ == '__main__':
     main()
