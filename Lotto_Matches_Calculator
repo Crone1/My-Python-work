@@ -13,12 +13,7 @@ for number in numbers:
 numbers = set(lucky_nums)
 
 for i in range(itterations):
-    lotto_numbers = []
-
-    while len(lotto_numbers) < 6:
-        num = random.randrange(1, 48)
-        if num not in lotto_numbers:
-            lotto_numbers.append(num)
+    lotto_numbers = random.sample(range(1,48), 6)
 
     draw = set(lotto_numbers)
 
