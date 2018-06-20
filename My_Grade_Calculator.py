@@ -88,11 +88,11 @@ def main():
     s1.add_mark('CA116', 93)
     s1.add_mark('CA119', 80)
     s1.add_mark('CA120', 72)
-    s1.add_mark('CA117', 40)
-    s1.add_mark('MS117', 40)
-    s1.add_mark('MS104', 40)
-    s1.add_mark('CA115', 40)
-    s1.add_mark('MS126', 35)
+    s1.add_mark('CA117', 88)
+    s1.add_mark('MS117', 84)
+    s1.add_mark('MS104', 74)
+    s1.add_mark('CA115', 76)
+    s1.add_mark('MS126', 79)
 
     print(s1)
                         
