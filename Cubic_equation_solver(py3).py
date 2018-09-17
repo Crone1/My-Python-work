@@ -226,7 +226,13 @@ def get_roots(a, b, c, d):
 
     big_sqr_minus = ((one - small_sqr) / 2)**(1 / 3)
 
-    if zero != 0 and one != 0:
+    guage = (18 * a * b * c * d) - (4 * d * (b**3)) + \
+        ((b**2) * (c**2)) - (4 * a * (c**3)) - (27 * (a**2) * (d**2))
+
+    print(guage)
+
+    if guage < 0:
+        # 1 real route + 2 complex conjugates
 
         root_1 = '{:.4f}'.format(-(1 / (3 * a)) *
                                  (b + big_sqr_plus + (zero / big_sqr_plus)))
@@ -237,20 +243,36 @@ def get_roots(a, b, c, d):
         root_3 = '{:.4f}'.format(-(1 / (3 * a)) * (b + (-1 / 2 - (
             1 / 2 * complex((3)**(1 / 2)))) * big_sqr_plus + (zero / big_sqr_plus)))
 
-    elif zero = one = 0:
-        root_1 = -b / (3 * a)
-
-    elif one = 0 and zero != 0:
-        root_1 = ((9 * a * d) - (b * c)) / (2 * zero)
-
-        root_2 = ((4 * a * b * c) - (9 * d * (a**2)) - b**3) / (a * zero)
+        root_2.isconjegate(root_3)
 
     return (root_1, root_2, root_3)
+
+    if guage == 0:
+
+        if zero == 0:
+
+            root_1 = root_2 = root_3 = '{:.4f}'.format(-b / (3 * a))
+
+        else:
+            root_1 = root_2 = '{:.4f}'.format(
+                ((9 * a * d) - (b * c)) / (2 * zero))
+
+            root_3 = '{:.4f}'.format(
+                ((4 * a * b * c) - (9 * d * (a**2)) - b**3) / (a * zero))
+
+        return (root_1, root_2, root_3)
+
+    if guage > 0:
+        # roots = 3 real
+        if zero != 0:
+        root_1 = '{:.4f}'.format(-(1 / (3 * a)) *
+                                 (b + big_sqr_plus + (zero / big_sqr_plus)))
 
 
 def print_solution(org_x, root_1, root_2, root_3):
 
     roots = set([root_1, root_2, root_3])
+    root_list = []
 
     for r in roots:
         j = r.rstrip('0').rstrip('.')
