@@ -1,5 +1,7 @@
+# Repository Overview
 This repostiroy contains a number of differeny Python program's that I developed outside of college to continue my learning of the language.
 
+# Project Details
 There are 5 main projects here:
 - A lotto simulator
 - A poker hand analyser
